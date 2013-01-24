@@ -12,7 +12,11 @@
 		AD26BA4E16B1CF4B003200F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD26BA4D16B1CF4B003200F7 /* main.m */; };
 		AD26BA5216B1CF4B003200F7 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AD26BA5016B1CF4B003200F7 /* Credits.rtf */; };
 		AD26BA5516B1CF4B003200F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD26BA5416B1CF4B003200F7 /* AppDelegate.m */; };
-		AD26BA5816B1CF4B003200F7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD26BA5616B1CF4B003200F7 /* MainMenu.xib */; };
+		AD26BA5F16B1CF7C003200F7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD26BA5E16B1CF7C003200F7 /* Security.framework */; };
+		AD26BA6116B1CF8E003200F7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AD26BA6016B1CF8E003200F7 /* README.md */; };
+		AD26BA6416B1CFF3003200F7 /* CKIP.m in Sources */ = {isa = PBXBuildFile; fileRef = AD26BA6316B1CFF3003200F7 /* CKIP.m */; };
+		AD26BA6716B1D04C003200F7 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = AD26BA6616B1D04C003200F7 /* GCDAsyncSocket.m */; };
+		AD26BA6A16B1D08B003200F7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AD26BA6916B1D08B003200F7 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +32,13 @@
 		AD26BA5116B1CF4B003200F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		AD26BA5316B1CF4B003200F7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AD26BA5416B1CF4B003200F7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AD26BA5716B1CF4B003200F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		AD26BA5E16B1CF7C003200F7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AD26BA6016B1CF8E003200F7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		AD26BA6216B1CFF3003200F7 /* CKIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKIP.h; sourceTree = "<group>"; };
+		AD26BA6316B1CFF3003200F7 /* CKIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKIP.m; sourceTree = "<group>"; };
+		AD26BA6516B1D04C003200F7 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		AD26BA6616B1D04C003200F7 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		AD26BA6916B1D08B003200F7 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD26BA5F16B1CF7C003200F7 /* Security.framework in Frameworks */,
 				AD26BA4216B1CF4B003200F7 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -46,6 +57,8 @@
 		AD26BA3216B1CF4B003200F7 = {
 			isa = PBXGroup;
 			children = (
+				AD26BA6016B1CF8E003200F7 /* README.md */,
+				AD26BA6816B1D051003200F7 /* TCKSocket */,
 				AD26BA4716B1CF4B003200F7 /* CocoaCKIPClient */,
 				AD26BA4016B1CF4B003200F7 /* Frameworks */,
 				AD26BA3E16B1CF4B003200F7 /* Products */,
@@ -63,6 +76,7 @@
 		AD26BA4016B1CF4B003200F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD26BA5E16B1CF7C003200F7 /* Security.framework */,
 				AD26BA4116B1CF4B003200F7 /* Cocoa.framework */,
 				AD26BA4316B1CF4B003200F7 /* Other Frameworks */,
 			);
@@ -82,9 +96,11 @@
 		AD26BA4716B1CF4B003200F7 /* CocoaCKIPClient */ = {
 			isa = PBXGroup;
 			children = (
+				AD26BA6216B1CFF3003200F7 /* CKIP.h */,
+				AD26BA6316B1CFF3003200F7 /* CKIP.m */,
 				AD26BA5316B1CF4B003200F7 /* AppDelegate.h */,
 				AD26BA5416B1CF4B003200F7 /* AppDelegate.m */,
-				AD26BA5616B1CF4B003200F7 /* MainMenu.xib */,
+				AD26BA6916B1D08B003200F7 /* MainMenu.xib */,
 				AD26BA4816B1CF4B003200F7 /* Supporting Files */,
 			);
 			path = CocoaCKIPClient;
@@ -100,6 +116,16 @@
 				AD26BA5016B1CF4B003200F7 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AD26BA6816B1D051003200F7 /* TCKSocket */ = {
+			isa = PBXGroup;
+			children = (
+				AD26BA6516B1D04C003200F7 /* GCDAsyncSocket.h */,
+				AD26BA6616B1D04C003200F7 /* GCDAsyncSocket.m */,
+			);
+			name = TCKSocket;
+			path = CocoaCKIPClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,7 +181,8 @@
 			files = (
 				AD26BA4C16B1CF4B003200F7 /* InfoPlist.strings in Resources */,
 				AD26BA5216B1CF4B003200F7 /* Credits.rtf in Resources */,
-				AD26BA5816B1CF4B003200F7 /* MainMenu.xib in Resources */,
+				AD26BA6116B1CF8E003200F7 /* README.md in Resources */,
+				AD26BA6A16B1D08B003200F7 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +195,8 @@
 			files = (
 				AD26BA4E16B1CF4B003200F7 /* main.m in Sources */,
 				AD26BA5516B1CF4B003200F7 /* AppDelegate.m in Sources */,
+				AD26BA6416B1CFF3003200F7 /* CKIP.m in Sources */,
+				AD26BA6716B1D04C003200F7 /* GCDAsyncSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,14 +217,6 @@
 				AD26BA5116B1CF4B003200F7 /* en */,
 			);
 			name = Credits.rtf;
-			sourceTree = "<group>";
-		};
-		AD26BA5616B1CF4B003200F7 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD26BA5716B1CF4B003200F7 /* en */,
-			);
-			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
