@@ -36,6 +36,8 @@ const static uint16_t CKIP_PORT = 1501;
 
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
+    NSLog(@"didConnectToHost");
+    
     // create XML for CKIP
     NSXMLElement *root = [NSXMLNode elementWithName:@"wordsegmentation"];
     [root addAttribute:[NSXMLNode attributeWithName:@"version" stringValue:@"0.1"]];
@@ -194,10 +196,18 @@ const static uint16_t CKIP_PORT = 1501;
         NSLog(@"Unable to connect to due to invalid configuration: %@", error);
         return;
     }
+    NSLog(@"connecting...");
     
     // After 10 seconds, stop
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 10), dispatch_get_current_queue(), ^{
         if (asyncSocket) {
+            if (![asyncSocket isConnected] && [delegate respondsToSelector:@selector(ckipCannotEstablishConnection:)]) {
+                NSLog(@"can't establish connection.... disconnect");
+                @autoreleasepool {
+                    __strong id theDelegate = delegate;
+                    [theDelegate ckipCannotEstablishConnection:self];
+                }
+            }
             [asyncSocket disconnect];
             asyncSocket = nil;
         }

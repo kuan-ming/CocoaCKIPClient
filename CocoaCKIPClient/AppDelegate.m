@@ -74,12 +74,36 @@
 
 - (void)ckipDidReceiveErrorProcessStatus:(NSInteger)code
 {
-    NSString *status = @"success";
-    if (code == 1) status = @"Service internal error";
-    else if (code == 2) status = @"XML format error";
-    else if (code == 3) status = @"Authentication failed";
-    NSAlert *alert = [NSAlert alertWithMessageText:status defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"code %ld", code];
-    [alert beginSheetModalForWindow:[self window] modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
+    NSString *status = nil;
+    if (code == 1)
+        status = @"Service internal error";
+    else if (code == 2)
+        status = @"XML format error";
+    else if (code == 3)
+        status = @"Authentication failed";
+    
+    NSAlert *alert = [NSAlert alertWithMessageText:status
+                                     defaultButton:@"OK"
+                                   alternateButton:nil
+                                       otherButton:nil
+                         informativeTextWithFormat:@"code %ld", code];
+    [alert beginSheetModalForWindow:[self window]
+                      modalDelegate:nil
+                     didEndSelector:NULL
+                        contextInfo:NULL];
+}
+
+- (void)ckipCannotEstablishConnection:(CKIP *)ckip
+{
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Connection Fail"
+                                     defaultButton:@"OK"
+                                   alternateButton:nil
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Cannot establish connection.\nCKIP server may be down.\nTry again later."];
+    [alert beginSheetModalForWindow:[self window]
+                      modalDelegate:nil
+                     didEndSelector:NULL
+                        contextInfo:NULL];
 }
 
 

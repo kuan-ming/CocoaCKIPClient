@@ -38,4 +38,6 @@
 @optional
 - (void)ckipDidFinish:(CKIP *)ckip;
 - (void)ckipDidReceiveErrorProcessStatus:(NSInteger)code;
+- (void)ckipCannotEstablishConnection:(CKIP *)ckip;
+
 @end
