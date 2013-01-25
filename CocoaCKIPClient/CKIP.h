@@ -25,7 +25,7 @@
 @property NSMutableArray *sentences;
 @property (readonly) NSArray *terms;
 
-- (id)initWithUsername:(NSString *)username password:(NSString *)password;
+- (id)initWithDelegate:(id)delegate username:(NSString *)username password:(NSString *)password;
 - (void)performCKIP;
 - (NSArray *)termsWithSentence:(NSString *)sentence;
 

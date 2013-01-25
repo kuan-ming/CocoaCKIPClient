@@ -33,8 +33,7 @@
 ## 使用方法
 
 <pre>
-[CKIP *ckip = [CKIP alloc] initWithUsername:@"username" password:@"password"];
-[ckip setDelegate:self];
+[CKIP *ckip = [CKIP alloc] initWithDelegate:self username:@"username" password:@"password"];
 [ckip setRawText:@"這行是要被斷詞的資料"];
 [ckip performCKIP];
 </pre>

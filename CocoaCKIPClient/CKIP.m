@@ -24,10 +24,11 @@ const static uint16_t CKIP_PORT = 1501;
 @synthesize processStatus;
 @synthesize sentences;
 
-- (id)initWithUsername:(NSString *)user password:(NSString *)pass
+- (id)initWithDelegate:(id)aDelegate username:(NSString *)user password:(NSString *)pass
 {
     self = [super init];
     if (self) {
+        delegate = aDelegate;
         username = user;
         password = pass;
     }

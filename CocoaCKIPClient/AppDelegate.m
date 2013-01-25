@@ -57,9 +57,9 @@
     [sheetSpinner startAnimation:self];
     [[NSApplication sharedApplication] beginSheet:[self sheetWindow] modalForWindow:[self window] modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
     
-    ckip = [[CKIP alloc] initWithUsername:[usernameField stringValue]
+    ckip = [[CKIP alloc] initWithDelegate: self
+                                 username:[usernameField stringValue]
                                  password:[passwordField stringValue]];
-    [ckip setDelegate:self];
     [ckip setRawText:[textView string]];
     [ckip performCKIP];
 }
