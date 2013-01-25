@@ -37,6 +37,12 @@ const static uint16_t CKIP_PORT = 1501;
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port
 {
     NSLog(@"didConnectToHost");
+    if ([delegate respondsToSelector:@selector(ckip:didConnectToHost:port:)]) {
+        @autoreleasepool {
+            __strong id theDelegate = delegate;
+            [theDelegate ckip:self didConnectToHost:host port:port];
+        }
+    }
     
     // create XML for CKIP
     NSXMLElement *root = [NSXMLNode elementWithName:@"wordsegmentation"];
@@ -92,8 +98,8 @@ const static uint16_t CKIP_PORT = 1501;
     
     // callback delegate's ckipDidFinish:
     if ([delegate respondsToSelector:@selector(ckipDidFinish:)]) {
-        __strong id theDelegate = delegate;
         @autoreleasepool {
+            __strong id theDelegate = delegate;
             [theDelegate ckipDidFinish:self];
         }
     }
@@ -115,10 +121,18 @@ const static uint16_t CKIP_PORT = 1501;
         if (processStatus == 0) {
             [self setSentences:[NSMutableArray new]];
         }
-        else if ([delegate respondsToSelector:@selector(ckipDidReceiveEroorProcessStatus:)]) {
-            __strong id theDelegate = delegate;
+        
+        if ([delegate respondsToSelector:@selector(ckip:didReceiveProcessStatus:code:)]) {
+            NSString *status = nil;
+            switch (processStatus) {
+                case 1:  status = @"Service internal error"; break;
+                case 2:  status = @"XML format error";       break;
+                case 3:  status = @"Authentication failed";  break;
+                default: status = @"Success";                break;
+            }
             @autoreleasepool {
-                [theDelegate ckipDidReceiveErrorProcessStatus:processStatus];
+                __strong id theDelegate = delegate;
+                [theDelegate ckip:self didReceiveProcessStatus:status code:processStatus];
             }
         }
     }
@@ -201,11 +215,11 @@ const static uint16_t CKIP_PORT = 1501;
     // After 10 seconds, stop
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 10), dispatch_get_current_queue(), ^{
         if (asyncSocket) {
-            if (![asyncSocket isConnected] && [delegate respondsToSelector:@selector(ckipCannotEstablishConnection:)]) {
+            if (![asyncSocket isConnected] && [delegate respondsToSelector:@selector(ckipDidFailToEstablishConnection:)]) {
                 NSLog(@"can't establish connection.... disconnect");
                 @autoreleasepool {
                     __strong id theDelegate = delegate;
-                    [theDelegate ckipCannotEstablishConnection:self];
+                    [theDelegate ckipDidFailToEstablishConnection:self];
                 }
             }
             [asyncSocket disconnect];

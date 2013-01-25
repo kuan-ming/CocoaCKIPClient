@@ -36,8 +36,9 @@
 
 @protocol CKIPDelegate
 @optional
+- (void)ckip:(CKIP *)ckip didConnectToHost:(NSString *)host port:(uint16_t)port;
 - (void)ckipDidFinish:(CKIP *)ckip;
-- (void)ckipDidReceiveErrorProcessStatus:(NSInteger)code;
-- (void)ckipCannotEstablishConnection:(CKIP *)ckip;
+- (void)ckip:(CKIP *)ckip didReceiveProcessStatus:(NSString *)status code:(NSInteger)code;
+- (void)ckipDidFailToEstablishConnection:(CKIP *)ckip;
 
 @end

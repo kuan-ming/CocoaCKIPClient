@@ -21,6 +21,8 @@
 @synthesize usernameField;
 @synthesize passwordField;
 @synthesize outputTerms;
+@synthesize sheetWindow;
+@synthesize sheetSpinner;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -52,6 +54,9 @@
 }
 
 - (IBAction)performCKIP:(id)sender {
+    [sheetSpinner startAnimation:self];
+    [[NSApplication sharedApplication] beginSheet:[self sheetWindow] modalForWindow:[self window] modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
+    
     ckip = [[CKIP alloc] initWithUsername:[usernameField stringValue]
                                  password:[passwordField stringValue]];
     [ckip setDelegate:self];
@@ -66,22 +71,27 @@
 
 #pragma mark - CKIPDelegate method
 
-- (void)ckipDidFinish:(id)ckip
+- (void)ckip:(CKIP *)ckip didConnectToHost:(NSString *)host port:(uint16_t)port
 {
-    [self displayCKIPOutput];
+    [[self sheetWindow] orderOut:self];
+    [[NSApplication sharedApplication] endSheet:[self sheetWindow]];
+    [sheetSpinner stopAnimation:self];
 }
 
-
-- (void)ckipDidReceiveErrorProcessStatus:(NSInteger)code
+- (void)ckipDidFinish:(id)theCKIP
 {
-    NSString *status = nil;
-    if (code == 1)
-        status = @"Service internal error";
-    else if (code == 2)
-        status = @"XML format error";
-    else if (code == 3)
-        status = @"Authentication failed";
+    if ([[theCKIP sentences] count])
+        [self displayCKIPOutput];
+}
+
+- (void)ckip:(CKIP *)ckip didReceiveProcessStatus:(NSString *)status code:(NSInteger)code
+{
+    // code = 0: success
+    if (code == 0) return;
     
+    // code = 1: Service internal error
+    // code = 2: XML format error
+    // code = 3: Authentication error
     NSAlert *alert = [NSAlert alertWithMessageText:status
                                      defaultButton:@"OK"
                                    alternateButton:nil
@@ -93,7 +103,7 @@
                         contextInfo:NULL];
 }
 
-- (void)ckipCannotEstablishConnection:(CKIP *)ckip
+- (void)ckipDidFailToEstablishConnection:(CKIP *)ckip
 {
     NSAlert *alert = [NSAlert alertWithMessageText:@"Connection Fail"
                                      defaultButton:@"OK"

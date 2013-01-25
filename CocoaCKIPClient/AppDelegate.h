@@ -27,6 +27,8 @@
 @property (unsafe_unretained) IBOutlet NSTextView *tokenizedTextView;
 @property (weak) IBOutlet NSTextField *usernameField;
 @property (weak) IBOutlet NSSecureTextField *passwordField;
+@property (unsafe_unretained) IBOutlet NSWindow *sheetWindow;
+@property (weak) IBOutlet NSProgressIndicator *sheetSpinner;
 
 - (IBAction)setOutputType:(id)sender;
 - (IBAction)performCKIP:(id)sender;
